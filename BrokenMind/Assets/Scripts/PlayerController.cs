@@ -19,11 +19,18 @@ public class PlayerController : MonoBehaviour
     private int extraJumps;
     public int extraJumpValue;
 
+    public HealthBar healthBar;
+    public int currentHealth;
+    public int maxHealth = 100;
+
+
 
     private void Start()
     {
         extraJumps = extraJumpValue;
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     private void FixedUpdate() {
@@ -55,12 +62,19 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.up * jumpForce;
         }
+        healthBar.SetHealth(currentHealth);
     }
 
     void Flip() {
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
+        Vector3 Scaler2 = healthBar.transform.localScale;
+        Scaler2.x *= -1;
+        healthBar.transform.localScale = Scaler2;
         Scaler.x *= -1;
         transform.localScale = Scaler;
     }
+
+
+
 }

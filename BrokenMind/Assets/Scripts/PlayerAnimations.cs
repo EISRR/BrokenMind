@@ -15,5 +15,10 @@ public class PlayerAnimations : MonoBehaviour
             anim.SetBool("isRunning", true);
         else
             anim.SetBool("isRunning", false);
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            anim.SetTrigger("jump");
+        }
     }
 }
