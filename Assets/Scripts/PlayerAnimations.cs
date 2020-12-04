@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
+
     private Animator anim;
     public PlayerController player;
     public int extraJumps;
     public int currentExtraJumps;
+    public AudioClip JumpSound;
+    private AudioSource audioSource;
 
     void Start() {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         GameObject g = GameObject.Find("Player");
         player = g.GetComponent<PlayerController>();
@@ -29,6 +33,9 @@ public class PlayerAnimations : MonoBehaviour
         {
             anim.SetTrigger("jump");
             currentExtraJumps--;
+            audioSource.Stop();
+            audioSource.clip = JumpSound;
+            audioSource.Play();
         }
     }
 }
