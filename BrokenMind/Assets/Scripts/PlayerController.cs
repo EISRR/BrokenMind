@@ -45,22 +45,23 @@ public class PlayerController : MonoBehaviour
         else if (facingRight == true && moveInput < 0)
             Flip();
 
-     }
+    }
 
-    private void Update(){
+    private void Update() {
         if (isGrounded == true)
         {
             extraJumps = extraJumpValue;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0)
-        { 
+        {
             rb.velocity = Vector2.up * jumpForce;
             extraJumps--;
         }
-        else if(Input.GetKeyDown(KeyCode.UpArrow)  && extraJumps==0 && isGrounded == true)
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps == 0 && isGrounded == true)
         {
             rb.velocity = Vector2.up * jumpForce;
+            extraJumps--;
         }
         healthBar.SetHealth(currentHealth);
     }
@@ -75,6 +76,13 @@ public class PlayerController : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-
+    public bool isOnGround()
+    {
+        return isGrounded;
+    }
+    public int getExtraJumpsCount()
+    {
+        return extraJumps;
+    }
 
 }
