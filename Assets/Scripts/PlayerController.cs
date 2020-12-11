@@ -23,7 +23,12 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
     public int maxHealth = 100;
 
+    public Transform punch;
+    public float punchRadius;
 
+    AudioSource audioSource;
+    public AudioClip Punch;
+    public AudioClip Woosh;
 
     private void Start()
     {
@@ -31,6 +36,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate() {
@@ -53,6 +59,19 @@ public class PlayerController : MonoBehaviour
             extraJumps = extraJumpValue;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fight2D.Action(punch.position, punchRadius, 10, 10, false);
+           
+            if (Fight2D.isEnemyNear)
+                audioSource.clip = Punch;
+            else
+                audioSource.clip = Woosh;
+            audioSource.Play();
+
+
+        }
+
         if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0)
         {
             rb.velocity = Vector2.up * jumpForce;
@@ -68,12 +87,12 @@ public class PlayerController : MonoBehaviour
 
     void Flip() {
         facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
+        Vector3 scaler = transform.localScale;
         Vector3 Scaler2 = healthBar.transform.localScale;
         Scaler2.x *= -1;
         healthBar.transform.localScale = Scaler2;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
+        scaler.x *= -1;
+        transform.localScale = scaler;
     }
 
     public bool isOnGround()

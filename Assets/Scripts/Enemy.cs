@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
             { movingRight = true; }
             
             GoBack(); }
-        
+        healthBar.SetHealth(currentHealth);
 
     }
 

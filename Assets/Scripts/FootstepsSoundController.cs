@@ -15,6 +15,8 @@ public class FootstepsSoundController : MonoBehaviour
     public AudioClip JumpSound;
 
     public AudioClip LandingSound;
+    public AudioClip Punch;
+    public AudioClip Woof;
 
     private AudioSource audioSource;
 
@@ -43,9 +45,13 @@ public class FootstepsSoundController : MonoBehaviour
 
     {
 
+       
+
         if (pController.isOnGround()) //персонаж на земле
 
         {
+
+
             currentExtraJumps = extraJumps;
 
             if (pController.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 0f) //персонаж двигается, используется квадратичная магнитуда,
@@ -71,11 +77,9 @@ public class FootstepsSoundController : MonoBehaviour
 
             {
 
-                if (audioSource.clip != JumpSound && audioSource.clip != LandingSound) //если аудиоклип в AudioSorce это не клип прыжка и не клип приземление
-
-                    if (audioSource.isPlaying)  //если звук проигрывается
-
-                        audioSource.Stop();  //выключаем проигрывание звуков
+                 
+                
+              
 
             }
 
@@ -85,7 +89,7 @@ public class FootstepsSoundController : MonoBehaviour
 
             {
 
-                audioSource.Stop();
+                
 
                 audioSource.clip = LandingSound;
 
@@ -111,7 +115,7 @@ public class FootstepsSoundController : MonoBehaviour
 
                 {
 
-                    audioSource.Stop();  //выключаем проигрывание звуков
+                     //выключаем проигрывание звуков
 
                 }
 

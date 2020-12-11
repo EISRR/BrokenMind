@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
+    public List<string> names;
 
     private Animator anim;
     public PlayerController player;
@@ -11,24 +12,33 @@ public class PlayerAnimations : MonoBehaviour
     public int currentExtraJumps;
     public AudioClip JumpSound;
     private AudioSource audioSource;
+    public const float timer = 0.5f;
+    public float timeLeft;
 
     void Start() {
+        names= new List<string>() { "superpunch", "punch" };
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         GameObject g = GameObject.Find("Player");
         player = g.GetComponent<PlayerController>();
         extraJumps = player.extraJumpValue;
+        timeLeft = 0;
     }
 
     void Update()
     {
+        timeLeft -= Time.deltaTime;
         if (player.isOnGround())
             currentExtraJumps = extraJumps;
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-            anim.SetBool("isRunning", true);
+        {
+              anim.SetBool("isRunning", true);
+        }
         else
+        {
             anim.SetBool("isRunning", false);
 
+        }
         if (Input.GetKeyDown(KeyCode.UpArrow) && currentExtraJumps>0)
         {
             anim.SetTrigger("jump");
@@ -37,5 +47,17 @@ public class PlayerAnimations : MonoBehaviour
             audioSource.clip = JumpSound;
             audioSource.Play();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var Rand = Random.Range(0, names.Count);
+            anim.SetTrigger(names[Rand]);
+            
+        }
+
+        }
     }
-}
+
+
+
+
