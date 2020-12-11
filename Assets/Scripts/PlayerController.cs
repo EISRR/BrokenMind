@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour
             extraJumps--;
         }
         healthBar.SetHealth(currentHealth);
+        if (currentHealth<=0)
+        {
+            Lose();
+        }
     }
 
     void Flip() {
@@ -103,5 +107,10 @@ public class PlayerController : MonoBehaviour
     {
         return extraJumps;
     }
+    void Lose()
+    {
+        Application.LoadLevel("Lose");
+        
 
+    }
 }

@@ -56,6 +56,12 @@ public class PlayerAnimations : MonoBehaviour
         }
 
         }
+
+    void Lose()
+    {
+        Application.LoadLevelAdditive("Lose");
+    
+    }
     }
 
 
