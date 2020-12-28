@@ -9,15 +9,13 @@ using UnityEngine;
 public class FootstepsSoundController : MonoBehaviour
 
 {
+ 
 
     public AudioClip FootstepsSound;
 
     public AudioClip JumpSound;
 
     public AudioClip LandingSound;
-    public AudioClip Punch;
-    public AudioClip Woof;
-
     private AudioSource audioSource;
 
     private PlayerController pController;
@@ -30,14 +28,11 @@ public class FootstepsSoundController : MonoBehaviour
     void Start()
 
     {
-
+     
         //getcomponent очень требователен к ресурсам компьютера, поэтому мы выполняем его один раз, “сохраняем ссылки” на компоненты
 
         audioSource = GetComponent<AudioSource>();
-
         pController = GetComponent<PlayerController>();
-
-        extraJumps = pController.extraJumpValue;
 
     }
 
@@ -45,14 +40,11 @@ public class FootstepsSoundController : MonoBehaviour
 
     {
 
-       
-
+  
         if (pController.isOnGround()) //персонаж на земле
 
         {
-
-
-            currentExtraJumps = extraJumps;
+            
 
             if (pController.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > 0f) //персонаж двигается, используется квадратичная магнитуда,
 
@@ -64,7 +56,7 @@ public class FootstepsSoundController : MonoBehaviour
                 { //проигрываем новый звук, только если сейчас никакой звук не играет
 
                     audioSource.clip = FootstepsSound;
-
+                    audioSource.volume = 0.2f;
                     audioSource.Play();
 
                 }
@@ -76,10 +68,11 @@ public class FootstepsSoundController : MonoBehaviour
             else //персонаж НЕ двигается
 
             {
+                if (audioSource.clip != JumpSound && audioSource.clip != LandingSound) //если аудиоклип в AudioSorce это не клип прыжка и не клип приземление
 
-                 
-                
-              
+                    if (audioSource.isPlaying && audioSource.clip == FootstepsSound)  //если звук проигрывается
+
+                        audioSource.Stop();  //выключаем проигрывание звуков
 
             }
 
@@ -89,9 +82,12 @@ public class FootstepsSoundController : MonoBehaviour
 
             {
 
-                
+
+
+                audioSource.Stop();
 
                 audioSource.clip = LandingSound;
+                audioSource.volume = 0.2f;
 
                 audioSource.Play();
 
@@ -111,11 +107,11 @@ public class FootstepsSoundController : MonoBehaviour
 
             {
 
-                if (audioSource.isPlaying) //если звук проигрывается
+               if (audioSource.isPlaying && audioSource.clip == FootstepsSound) //если звук проигрывается
 
                 {
 
-                     //выключаем проигрывание звуков
+                    audioSource.Stop();  //выключаем проигрывание звуков
 
                 }
 
@@ -127,18 +123,16 @@ public class FootstepsSoundController : MonoBehaviour
 
             {
 
-                //audioSource.Stop();
+                audioSource.Stop();
 
-                //audioSource.clip = JumpSound;
+                audioSource.clip = JumpSound;
+                audioSource.volume = 0.3f;
 
-                //audioSource.Play();
-                //currentExtraJumps--;    
+                audioSource.Play();
 
             }
 
-            //if (currentExtraJumps > 0)
-              //  wasGrounded = true; 
-            else wasGrounded = false; //запоминаем прошлое состояние персонажа – в данном случае персонаж в воздухе 
+            wasGrounded = false; //запоминаем прошлое состояние персонажа – в данном случае персонаж в воздухе 
 
         }
 

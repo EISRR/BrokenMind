@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Fight2D : MonoBehaviour
 {
+
+
+
+	public static bool playerGodMod = false;
 	public static bool  isEnemyNear=false;
 	// функция возвращает ближайший объект из массива, относительно указанной позиции
 	static GameObject NearTarget(Vector3 position, Collider2D[] array)
@@ -38,11 +42,50 @@ public class Fight2D : MonoBehaviour
 			GameObject obj = NearTarget(point, colliders);
 			if (obj != null)
 			{
+				
 				isEnemyNear = true;
-				Enemy enemy = obj.GetComponent<Enemy>();
-				enemy.currentHealth -= damage;
+				if (layerMask == 10 && obj.name=="Enemy")
+				{
+					Enemy enemy = obj.GetComponent<Enemy>();
+					enemy.currentHealth -= damage;
+					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+					rb.velocity = Vector3.zero;
+					rb.AddForce(enemy.transform.up * 2.0F, ForceMode2D.Impulse);
+
+				}
+				if (layerMask == 10 && obj.name == "Wolf")
+				{
+					WolfScript enemy = obj.GetComponent<WolfScript>();
+					enemy.currentHealth -= damage;
+					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+					rb.velocity = Vector3.zero;
+					rb.AddForce(enemy.transform.up * 2.0F, ForceMode2D.Impulse);
+
+				}
+				if (layerMask == 10 && obj.name == "Skeleton")
+				{
+					SkeletonScript enemy = obj.GetComponent<SkeletonScript>();
+					enemy.currentHealth -= damage;
+					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+					rb.velocity = Vector3.zero;
+					rb.AddForce(enemy.transform.up * 2.0F, ForceMode2D.Impulse);
+
+				}
+				if (layerMask == 11)
+				{
+					PlayerController p = obj.GetComponent<PlayerController>();
+					if (!p.godMod)
+					{
+						p.currentHealth -= 5;
+						p.SetGodMod();
+					}
+
+				}
 			}
 			else
 				isEnemyNear = false;		}
 	}
+
+	
+
 }

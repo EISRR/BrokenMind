@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int damage;
     public float speed;
     public float jumpForce;
     private float moveInput;
     private bool facingRight = true;
     private bool isGrounded;
-
+    public bool godMod = false;
     private Rigidbody2D rb;
 
     public Transform groundCheck;
@@ -61,10 +62,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Fight2D.Action(punch.position, punchRadius, 10, 10, false);
-           
+            Fight2D.Action(punch.position, punchRadius, 10, damage, false);
+            audioSource.volume = 0.15f;
             if (Fight2D.isEnemyNear)
                 audioSource.clip = Punch;
+            
             else
                 audioSource.clip = Woosh;
             audioSource.Play();
@@ -112,5 +114,18 @@ public class PlayerController : MonoBehaviour
         Application.LoadLevel("Lose");
         
 
+    }
+
+
+    public void SetGodMod()
+    {
+        godMod = true;
+        Invoke("SetGodModToFalse",1f);
+        rb.velocity = Vector3.zero;
+        rb.AddForce(transform.up * 2.0F, ForceMode2D.Impulse);
+    }
+    public void SetGodModToFalse()
+    {
+        godMod = false;
     }
 }

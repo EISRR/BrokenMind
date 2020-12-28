@@ -22,7 +22,7 @@ public class EnemyAnimations : MonoBehaviour
             anim.SetBool("isAngry", true);
        else 
             anim.SetBool("isAngry", false);
-
+        
 
 
     }
