@@ -20,6 +20,18 @@ TextureImporter:
   - first:
       213: -6342726297538767779
     second: base_out_atlas_5
+  - first:
+      213: -737343633282364862
+    second: base_out_atlas_6
+  - first:
+      213: -3881035915869341770
+    second: base_out_atlas_7
+  - first:
+      213: 6358587210928667533
+    second: base_out_atlas_8
+  - first:
+      213: 441211700340818260
+    second: base_out_atlas_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -242,7 +254,7 @@ TextureImporter:
         width: 97
         height: 45
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -250,6 +262,90 @@ TextureImporter:
       bones: []
       spriteID: d545caf990c1af7a0800000000000000
       internalID: -6342726297538767779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: base_out_atlas_6
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 704
+        width: 32
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a0fc44fdd64c5f0800000000000000
+      internalID: -737343633282364862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: base_out_atlas_7
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 807
+        width: 26
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b7331aa56ac32ac0800000000000000
+      internalID: -3881035915869341770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: base_out_atlas_8
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 450
+        width: 48
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8bbebc016d3e3850800000000000000
+      internalID: 6358587210928667533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: base_out_atlas_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 580
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4518f8d24bf7f1600800000000000000
+      internalID: 441211700340818260
       vertices: []
       indices: 
       edges: []
