@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public bool godMod = false;
     private Rigidbody2D rb;
 
+    public bool Coolmask = false;
+
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
@@ -26,10 +28,14 @@ public class PlayerController : MonoBehaviour
 
     public Transform punch;
     public float punchRadius;
-
+    public Transform sword;
+    public float swordRadius;
     AudioSource audioSource;
     public AudioClip Punch;
     public AudioClip Woosh;
+    public AudioClip SwordAttack;
+    public AudioClip Sword;
+    private int defaultDamage;
 
     private void Start()
     {
@@ -38,6 +44,7 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         audioSource = GetComponent<AudioSource>();
+        defaultDamage = damage;
     }
 
     private void FixedUpdate() {
@@ -55,6 +62,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
+        if (Coolmask)
+        {
+            damage =defaultDamage*2;
+        }
+        else damage = defaultDamage;
         if (isGrounded == true)
         {
             extraJumps = extraJumpValue;
@@ -62,16 +74,40 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Fight2D.Action(punch.position, punchRadius, 10, damage, false);
-            audioSource.volume = 0.15f;
-            if (Fight2D.isEnemyNear)
-                audioSource.clip = Punch;
-            
-            else
-                audioSource.clip = Woosh;
-            audioSource.Play();
+            if (!Coolmask)
+            {
+                Fight2D.Action(punch.position, punchRadius, 10, damage, false);
+                audioSource.volume = 0.15f;
+                if (Fight2D.isEnemyNear)
+                    audioSource.clip = Punch;
+
+                else
+                    audioSource.clip = Woosh;
+                audioSource.Play();
+            }
+            else {
+                Fight2D.Action(punch.position, swordRadius, 10, damage, false);
+                audioSource.volume = 0.5f;
+                if (Fight2D.isEnemyNear)
+                    audioSource.clip = SwordAttack;
+
+                else
+                    audioSource.clip = Sword;
+                audioSource.Play();
 
 
+
+
+
+
+            }
+
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Coolmask = !Coolmask;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0)
@@ -127,5 +163,17 @@ public class PlayerController : MonoBehaviour
     public void SetGodModToFalse()
     {
         godMod = false;
+    }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag.StartsWith("Heal"))
+        {
+            Destroy(col.gameObject);
+            if (currentHealth < maxHealth)
+                currentHealth += 30;
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth;
+        
+        }
     }
 }

@@ -50,25 +50,34 @@ public class Fight2D : MonoBehaviour
 					enemy.currentHealth -= damage;
 					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
 					rb.velocity = Vector3.zero;
-					rb.AddForce(enemy.transform.up * 2.0F, ForceMode2D.Impulse);
+					rb.AddForce(enemy.transform.up * 3.0F, ForceMode2D.Impulse);
 
 				}
-				if (layerMask == 10 && obj.name == "Wolf")
+				if (layerMask == 10 && obj.name.StartsWith("Wolf"))
 				{
 					WolfScript enemy = obj.GetComponent<WolfScript>();
 					enemy.currentHealth -= damage;
 					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
 					rb.velocity = Vector3.zero;
-					rb.AddForce(enemy.transform.up * 2.0F, ForceMode2D.Impulse);
+					rb.AddForce(enemy.transform.up * 3.0F, ForceMode2D.Impulse);
 
 				}
-				if (layerMask == 10 && obj.name == "Skeleton")
+				if (layerMask == 10 && obj.name.StartsWith("Skeleton"))
 				{
 					SkeletonScript enemy = obj.GetComponent<SkeletonScript>();
 					enemy.currentHealth -= damage;
 					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
 					rb.velocity = Vector3.zero;
-					rb.AddForce(enemy.transform.up * 2.0F, ForceMode2D.Impulse);
+					rb.AddForce(enemy.transform.up * 3.0F, ForceMode2D.Impulse);
+
+				}
+				if (layerMask == 10 && obj.name.StartsWith("Boss"))
+				{
+					BossScript enemy = obj.GetComponent<BossScript>();
+					enemy.currentHealth -= damage;
+					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
+					rb.velocity = Vector3.zero;
+					rb.AddForce(enemy.transform.up * 3.0F, ForceMode2D.Impulse);
 
 				}
 				if (layerMask == 11)

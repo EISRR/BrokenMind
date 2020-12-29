@@ -87,7 +87,7 @@ public class FootstepsSoundController : MonoBehaviour
                 audioSource.Stop();
 
                 audioSource.clip = LandingSound;
-                audioSource.volume = 0.2f;
+                audioSource.volume = 0.1f;
 
                 audioSource.Play();
 

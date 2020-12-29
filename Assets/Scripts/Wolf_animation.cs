@@ -12,7 +12,7 @@ public class Wolf_animation : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        g = GameObject.Find("Wolf");
+        g = GameObject.Find(this.gameObject.name);
         enemy = g.GetComponent<WolfScript>();
     }
 
@@ -23,7 +23,7 @@ public class Wolf_animation : MonoBehaviour
         else
             anim.SetBool("angry", false);
 
-        Fight2D.Action(new Vector2(g.transform.position.x, g.transform.position.y), 1, 11, 10, false);
+        Fight2D.Action(new Vector2(g.transform.position.x, g.transform.position.y), 1, 11, 5, false);
         if (Fight2D.isEnemyNear)
         {
             anim.SetBool("possibleToAttack", true);

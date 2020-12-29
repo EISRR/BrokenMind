@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonScript : MonoBehaviour
+public class BossScript : MonoBehaviour
 {
     public float speed;
+    public float runSpeed;
     public float walkSpeed;
     public int positionOfPatrol;
     public Transform point;
     public bool movingRight = true;
-
+    
     Transform player;
     public float stoppingDistance;
     bool chill = false;
@@ -18,10 +19,9 @@ public class SkeletonScript : MonoBehaviour
 
     public HealthBar healthBar;
     public int currentHealth;
-    public int maxHealth = 100;
+    public int maxHealth ;
     AudioSource audioSource;
     public AudioClip Attack;
-    
 
 
     // Start is called before the first frame update
@@ -65,7 +65,7 @@ public class SkeletonScript : MonoBehaviour
         }
         healthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
-        { Invoke("destr",1f); } 
+        { { Invoke("destr", 0.5f); } }
     }
 
     void Chill()
@@ -113,6 +113,11 @@ public class SkeletonScript : MonoBehaviour
 
     }
 
+    void destr()
+    {
+        Destroy(this.gameObject);
+    }
+
     public void attack()
     {
         if (!audioSource.isPlaying)
@@ -121,12 +126,8 @@ public class SkeletonScript : MonoBehaviour
             audioSource.Play();
         }
     }
-    void destr()
-    {
-        Destroy(this.gameObject);
-    }
 
-   /* void OnCollisionEnter2D(Collision2D col)
+    /* void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
         {
@@ -136,4 +137,5 @@ public class SkeletonScript : MonoBehaviour
         }
     }
     */
+
 }

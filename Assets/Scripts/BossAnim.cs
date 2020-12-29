@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonAnim : MonoBehaviour
+public class BossAnim : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator anim;
-    GameObject g;
-    SkeletonScript enemy;
-
+    GameObject g,g2;
+    BossScript enemy;
+    PlayerController player;
     void Start()
     {
         anim = GetComponent<Animator>();
+        
         g = GameObject.Find(this.gameObject.name);
-        enemy = g.GetComponent<SkeletonScript>();
-
+        enemy = g.GetComponent<BossScript>();
+        g2 = GameObject.Find("Player");
+        player = g2.GetComponent<PlayerController>();
     }
 
     void Update()
@@ -24,19 +26,21 @@ public class SkeletonAnim : MonoBehaviour
         else
             anim.SetBool("angry", false);
 
-        Fight2D.Action(new Vector2(g.transform.position.x, g.transform.position.y), 1, 11, 5, false);
+        Fight2D.Action(new Vector2(g.transform.position.x-(float)0.28, g.transform.position.y), 2, 11, 15, false);
         if (Fight2D.isEnemyNear)
         {
+            if(!player.godMod)
+                player.currentHealth -= 15;
             anim.SetBool("possibleToAttack", true);
             enemy.attack();
         }
         else
             anim.SetBool("possibleToAttack", false);
-        if (enemy.speed == 0)
+        if (enemy.speed == 0 || enemy.currentHealth <= 0)
             anim.SetBool("stay", true);
         else
             anim.SetBool("stay", false);
-        if (enemy.currentHealth<=0)
-            anim.SetBool("dead", true);
+
+
     }
 }

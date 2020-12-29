@@ -27,6 +27,7 @@ public class PlayerAnimations : MonoBehaviour
 
     void Update()
     {
+        
         timeLeft -= Time.deltaTime;
         if (player.isOnGround())
             currentExtraJumps = extraJumps;
@@ -50,9 +51,20 @@ public class PlayerAnimations : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var Rand = Random.Range(0, names.Count);
-            anim.SetTrigger(names[Rand]);
-            
+            if (anim.GetBool("coolmask"))
+            {
+                anim.SetTrigger("SwordAttack");
+            }
+            else
+            {
+                var Rand = Random.Range(0, names.Count);
+                anim.SetTrigger(names[Rand]);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            anim.SetBool("coolmask", !anim.GetBool("coolmask"));
         }
 
         }
