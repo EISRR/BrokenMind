@@ -65,6 +65,7 @@ public class PlayerAnimations : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             anim.SetBool("coolmask", !anim.GetBool("coolmask"));
+            
         }
 
         }

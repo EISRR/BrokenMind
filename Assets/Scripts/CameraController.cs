@@ -1,26 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
-
+    public Canvas canvas;
     public float dumping = 1.5f;
-    public Vector2 offset = new Vector2(2f, 1f);
+    public Vector2 offset = new Vector2(3f, 2f);
     public bool isLeft;
     private Transform player;
     private int lastX;
+    public GameObject MaskIndikator;
+    Image image;
+    bool flag = false;
 
     // Start is called before the first frame update
     void Start()
     {
         offset = new Vector2(Mathf.Abs(offset.x), offset.y);
         FindPlayer(isLeft);
+        MaskIndikator = GameObject.Find("Mask_indikator");
+        image = MaskIndikator.GetComponent<Image>();
+        image.sprite = Resources.Load<Sprite>("maski");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if (flag)
+            {
+                image.sprite = Resources.Load<Sprite>("maski");
+                flag = !flag;
+            }
+            else
+            {
+                image.sprite = Resources.Load<Sprite>("maski2");
+                flag = !flag;
+            }
+        }
+
         if (player)
         {
             int currentX = Mathf.RoundToInt(player.position.x);

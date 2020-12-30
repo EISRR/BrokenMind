@@ -55,6 +55,7 @@ public class Fight2D : MonoBehaviour
 				}
 				if (layerMask == 10 && obj.name.StartsWith("Wolf"))
 				{
+					Debug.Log(obj.gameObject.name);
 					WolfScript enemy = obj.GetComponent<WolfScript>();
 					enemy.currentHealth -= damage;
 					Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
