@@ -65,9 +65,17 @@ public class BossScript : MonoBehaviour
         }
         healthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
-        { { Invoke("destr", 0.5f); } }
+        { { Invoke("destr", 0.5f); }
+            Win();
+        }
     }
 
+    void Win()
+    {
+        
+        Application.LoadLevel("Win");
+
+    }
     void Chill()
     {
         speed = 0;

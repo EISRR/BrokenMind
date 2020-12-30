@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool Coolmask = false;
-
+    
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip Punch;
     public AudioClip Woosh;
     public AudioClip SwordAttack;
+    public AudioClip Coin;
     public AudioClip Sword;
     private int defaultDamage;
 
@@ -123,7 +124,7 @@ public class PlayerController : MonoBehaviour
         healthBar.SetHealth(currentHealth);
         if (currentHealth<=0)
         {
-            Lose();
+            Loset();
         }
     }
 
@@ -145,13 +146,14 @@ public class PlayerController : MonoBehaviour
     {
         return extraJumps;
     }
-    void Lose()
+    void Loset()
     {
+        
         Application.LoadLevel("Lose");
         
 
     }
-
+    
 
     public void SetGodMod()
     {
@@ -173,7 +175,11 @@ public class PlayerController : MonoBehaviour
                 currentHealth += 30;
             if (currentHealth > maxHealth)
                 currentHealth = maxHealth;
-        
+            audioSource.volume = 0.4f;
+            audioSource.clip = Coin;
+            audioSource.Play();
+
+
         }
     }
 }
